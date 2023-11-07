@@ -17,6 +17,19 @@ module.exports = class MailController {
   static async mailSend(req, res) {
     const { remetente, assunto, mensagem } = req.body;
 
+    await new Promise((resolve, reject) => {
+      // verify connection configuration
+      transporter.verify(function (error, success) {
+        if (error) {
+          console.log(error);
+          reject(error);
+        } else {
+          console.log('Server is ready to take our messages');
+          resolve(success);
+        }
+      });
+    });
+
     const mailOptions = {
       from: EMAIL,
       to: EMAIL,
@@ -25,14 +38,17 @@ module.exports = class MailController {
       <p>${mensagem}</p>`,
     };
 
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        console.error(error);
-        res.status(500).send('Ocorreu um erro ao enviar o e-mail');
-      } else {
-        console.log('E-mail enviado: ' + info.response);
-        res.status(200).send('E-mail enviado com sucesso');
-      }
+    await new Promise((resolve, reject) => {
+      // send mail
+      transporter.sendMail(mailData, (err, info) => {
+        if (err) {
+          console.error(err);
+          reject(err);
+        } else {
+          console.log(info);
+          resolve(info);
+        }
+      });
     });
   }
 };
