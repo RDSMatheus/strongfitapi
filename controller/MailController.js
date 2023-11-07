@@ -18,7 +18,7 @@ module.exports = class MailController {
     const { remetente, assunto, mensagem } = req.body;
 
     const mailOptions = {
-      from: remetente,
+      from: EMAIL,
       to: EMAIL, // Replace with the recipient's email address
       subject: assunto,
       text: mensagem,
