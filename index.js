@@ -20,6 +20,8 @@ const mailRoutes = require('./routes/mailRoutes');
 
 app.use('/contact', mailRoutes);
 
-app.listen(PORT);
+app.listen(PORT, () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
+});
 
 module.exports = app;
