@@ -7,14 +7,14 @@ const PORT = process.env.PORT;
 const ORIGIN = process.env.ORIGIN;
 
 const corsOptions = {
-  origin: ORIGIN, // Substitua pelo domínio do seu site
+  origin: ORIGIN,
   methods: 'GET,PUT,POST,DELETE',
   allowedHeaders: 'Content-Type,Authorization',
 };
 
 app.use(express.json());
 
-app.use(cors());
+app.use(cors(corsOptions));
 
 const mailRoutes = require('./routes/mailRoutes');
 
