@@ -17,8 +17,10 @@ app.use(express.json());
 app.use(cors({ origin: '*' }));
 
 const mailRoutes = require('./routes/mailRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 app.use('/contact', mailRoutes);
+app.use('/', userRoutes);
 
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
