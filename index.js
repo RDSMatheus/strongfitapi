@@ -14,7 +14,7 @@ const corsOptions = {
 
 app.use(express.json());
 
-app.use(cors(cors({ origin: '*' })));
+app.use(cors({ origin: '*' }));
 
 const mailRoutes = require('./routes/mailRoutes');
 
