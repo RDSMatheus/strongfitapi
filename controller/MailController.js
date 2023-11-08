@@ -19,7 +19,7 @@ module.exports = class MailController {
 
     const mailOptions = {
       from: EMAIL,
-      to: EMAIL, 
+      to: EMAIL,
       subject: assunto,
       text: `email:${email}, nome:${nome}, mensagem:${mensagem}`,
     };
@@ -30,7 +30,7 @@ module.exports = class MailController {
         res.status(500).send('Ocorreu um erro ao enviar o e-mail');
       } else {
         console.log('E-mail enviado: ' + info.response);
-        res.status(200).json({ message: 'E-mail enviado com sucesso' });
+        res.status(200).send({ message: 'E-mail enviado com sucesso' });
       }
     });
   }
