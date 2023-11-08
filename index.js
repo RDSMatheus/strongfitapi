@@ -1,12 +1,16 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-
 const app = express();
 
 const PORT = process.env.PORT;
+const ORIGIN = process.env.ORIGIN;
 
-console.log(PORT);
+const corsOptions = {
+  origin: ORIGIN, // Substitua pelo domínio do seu site
+  methods: 'GET,PUT,POST,DELETE',
+  allowedHeaders: 'Content-Type,Authorization',
+};
 
 app.use(express.json());
 

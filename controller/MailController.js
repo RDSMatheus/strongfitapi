@@ -15,13 +15,13 @@ const transporter = nodemailer.createTransport({
 
 module.exports = class MailController {
   static async mailSend(req, res) {
-    const { remetente, assunto, mensagem } = req.body;
+    const { email, nome, assunto, mensagem } = req.body;
 
     const mailOptions = {
       from: EMAIL,
       to: EMAIL, // Replace with the recipient's email address
       subject: assunto,
-      text: mensagem,
+      text: `email:${email}, nome:${nome}, mensagem:${mensagem}`,
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
