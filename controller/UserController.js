@@ -30,6 +30,7 @@ module.exports = class UserController {
 
     if (cpfExist) {
       res.status(422).json({ message: 'CPF já cadastrado!' });
+      return;
     }
 
     const user = new User({
@@ -48,6 +49,7 @@ module.exports = class UserController {
       });
     } catch (error) {
       res.status(500).json({ message: error });
+      return;
     }
   }
 };
