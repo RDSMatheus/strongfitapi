@@ -4,17 +4,17 @@ const cors = require('cors');
 const app = express();
 
 const PORT = process.env.PORT;
-const CONTACT = process.env.ORIGIN;
+const ORIGIN = process.env.ORIGIN;
 
 const corsOptions = {
-  origin: CONTACT,
+  origin: ORIGIN,
   methods: 'POST',
-  allowedHeaders: 'Content-Type,Authorization',
+  allowedHeaders: 'Content-Type, Authorization',
 };
 
-app.use(express.json());
-
 app.use(cors(corsOptions));
+
+app.use(express.json());
 
 const mailRoutes = require('./routes/mailRoutes');
 const userRoutes = require('./routes/userRoutes');
