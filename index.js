@@ -8,8 +8,6 @@ const ORIGIN = process.env.ORIGIN;
 
 const corsOptions = {
   origin: ORIGIN,
-  methods: 'POST',
-  allowedHeaders: 'Content-Type, Authorization',
 };
 
 app.use(cors(corsOptions));
