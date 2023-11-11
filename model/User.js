@@ -23,7 +23,8 @@ const User = mongoose.model(
       },
       plan: {
         require: true,
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: 'Plan',
       },
     },
     {
