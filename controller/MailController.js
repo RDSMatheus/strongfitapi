@@ -15,13 +15,28 @@ const transporter = nodemailer.createTransport({
 
 module.exports = class MailController {
   static async mailSend(req, res) {
-    const { email, nome, assunto, mensagem } = req.body;
+    const { email, name, subject, message } = req.body;
+
+    if (!email) {
+      res.status(422).json({ message: 'Informe um email!' });
+      return;
+    }
+
+    if (!name) {
+      res.status(422).json({ message: 'Informe um nome!' });
+      return;
+    }
+
+    if (!message) {
+      res.status(422).json({ message: 'Escreva a messagem!' });
+      return;
+    }
 
     const mailOptions = {
       from: EMAIL,
       to: EMAIL,
-      subject: assunto,
-      text: `email:${email}, nome:${nome}, mensagem:${mensagem}`,
+      subject,
+      text: `email:${email}, nome:${name}, mensagem:${message}`,
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
