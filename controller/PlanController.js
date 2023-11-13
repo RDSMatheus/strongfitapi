@@ -1,4 +1,5 @@
 const Plan = require('../model/Plan');
+const mongoose = require('mongoose');
 
 module.exports = class PlanController {
   static async addPlan(req, res) {
@@ -34,6 +35,7 @@ module.exports = class PlanController {
 
     try {
       res.status(200).json({ plan });
+      return;
     } catch (error) {
       res.status(500).json({ message: error });
       return;
@@ -43,10 +45,20 @@ module.exports = class PlanController {
   static async getPlanById(req, res) {
     const { id } = req.params;
 
-    const plan = await Plan.findById(id);
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      res.status(400).json({ message: 'ID inválido' });
+      return;
+    }
 
     try {
+      const plan = await Plan.findById(id);
+
+      if (!plan) {
+        res.status(404).json({ message: 'Plano não encontrado' });
+        return;
+      }
       res.status(200).json({ plan });
+      return;
     } catch (error) {
       res.status(500).json({ message: error });
       return;
@@ -58,6 +70,7 @@ module.exports = class PlanController {
 
     try {
       res.status(200).json({ plans });
+      return;
     } catch (error) {
       res.status(500).json({ message: error });
       return;
