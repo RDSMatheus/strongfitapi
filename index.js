@@ -9,6 +9,9 @@ const bodyParser = require('body-parser'),
 const PORT = process.env.PORT;
 const ORIGIN = process.env.ORIGIN;
 
+const CSS_URL =
+  'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css';
+
 const options = {
   definition: {
     openapi: '3.1.0',
@@ -36,7 +39,11 @@ const options = {
 };
 
 const specs = swaggerJsdoc(options);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+app.use(
+  '/api-docs',
+  swaggerUi.serve,
+  swaggerUi.setup(specs, { customCssUrl: CSS_URL }),
+);
 
 app.use(
   cors({
